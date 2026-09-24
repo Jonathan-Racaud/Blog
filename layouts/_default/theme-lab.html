@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="{{ "css/theme-lab.css" | relURL }}">
 </head>
 <body>
+  {{ $tocStyle := .Params.tocStyle | default "none" }}
+  {{ $labRoot := "/theme-lab/" | relURL }}
+  {{ with .Site.GetPage "theme-lab" }}{{ $labRoot = .RelPermalink }}{{ end }}
   <div class="shell">
     <header class="chrome">
       <a class="brand" href="{{ .Site.Home.RelPermalink }}">J<span>Racaud</span></a>
@@ -15,7 +18,7 @@
         {{ range .Site.Menus.nav }}
         <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
         {{ end }}
-        <a class="nav-link is-active" href="{{ .RelPermalink }}" aria-current="page">Lab</a>
+        <a class="nav-link is-active" href="{{ $labRoot }}" aria-current="page">Lab</a>
       </nav>
       <div class="status" aria-hidden="true">
         <span class="led"></span>
@@ -23,14 +26,49 @@
       </div>
     </header>
 
-    <main class="panel">
+    <main class="panel{{ if eq $tocStyle "rail" }} panel--rail{{ end }}">
       <div class="panel-head">
         <span class="panel-label">PANEL · R1</span>
         <span class="panel-label">LIGHT MODE</span>
       </div>
+
+      {{ if eq $tocStyle "rail" }}
+      <div class="rail">
+        <nav class="toc toc--rail" aria-label="Table of contents">
+          <p class="toc-label">PANEL INDEX</p>
+          <div class="toc-body">{{ .TableOfContents }}</div>
+        </nav>
+        <article class="content">
+          {{ if ne .RelPermalink $labRoot }}
+          <a class="back-link" href="{{ $labRoot }}">← THEME LAB HUB</a>
+          {{ end }}
+          {{ .Content }}
+        </article>
+      </div>
+      {{ else }}
       <article class="content">
+        {{ if ne .RelPermalink $labRoot }}
+        <a class="back-link" href="{{ $labRoot }}">← THEME LAB HUB</a>
+        {{ end }}
+
+        {{ if eq $tocStyle "inline" }}
+        <nav class="toc toc--inline" aria-label="Table of contents">
+          <p class="toc-label">PANEL INDEX</p>
+          <div class="toc-body">{{ .TableOfContents }}</div>
+        </nav>
+        {{ else if eq $tocStyle "collapsible" }}
+        <details class="toc toc--collapsible">
+          <summary class="toc-summary">
+            <span>PANEL INDEX</span>
+            <span class="toc-caret" aria-hidden="true">+</span>
+          </summary>
+          <div class="toc-body">{{ .TableOfContents }}</div>
+        </details>
+        {{ end }}
+
         {{ .Content }}
       </article>
+      {{ end }}
     </main>
 
     <footer class="footer">

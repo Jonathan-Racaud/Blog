@@ -205,3 +205,122 @@ Then a final question was asked: *"What should the next iteration focus on?"* wi
 - The original session export contained the full `theme-lab.md` diff and the full CSS, but **not** the layout HTML (only its byte count). The layout was recovered from the repository and is described in §5.2.
 - The tail of the "Direction locked" design-thesis message was truncated in the export; §4 reflects the implemented state confirmed by the iteration 01 summary.
 - The final "next focus" `ask` was sent, but no tool result with the user's answer is present in the export.
+
+---
+
+## 9. Session journal
+
+Every question, answer, decision and implementation step from here on is appended below by the `theme-lab` skill / `theme-lab-agent`. This journal is the failure-recovery source of truth.
+
+### 2026-09-23 19:24 — tooling, round 1
+
+- **Question** (user request): "Create a skill and agent for the purpose of running this iterative theme creation. The agent/skill should also write down all of the questions, answers and decisions that are taken so as to be able to remember the state of a task in case a failure happens."
+- **Options offered**: none — direct request.
+- **Answer / Decision locked**: create two project-scope artifacts under `.reasonix/skills/`:
+  - `theme-lab` — an inline playbook skill (`runAs: inline`) that runs the iterative design loop and enforces the journaling rules.
+  - `theme-lab-agent` — an isolated subagent profile (`runAs: subagent`) that executes one chunk of the workflow and persists the same journal.
+- **Implemented**:
+  - `.reasonix/skills/theme-lab/SKILL.md` (inline skill)
+  - `.reasonix/skills/theme-lab-agent/SKILL.md` (subagent)
+  - This `## Session journal` section appended to `THEME-LAB-DECISIONS.md`
+  - Project memory `jracaud-theme-lab-decisions` revised to reference the new artifacts and the journal convention
+- **Open items**: skills are picked up after the next session refresh — verify both appear in the Skills catalog; continue with the unanswered iteration-02 focus question.
+
+### 2026-09-24 12:36 — state recovery, round 2
+
+- **Discrepancy found** between this log and the committed files. Per skill step 0, the files are the implementation truth:
+  - §5.3 / §6.6 claim "system font stacks only (no webfont requests)". The committed `static/css/theme-lab.css` (commit `cfbf836`, "Iteration 01 on the new theme") actually loads **ClashDisplay-Variable** and **Chillax-Variable** from `static/fonts/` (reused from the NC-750 Lab design system).
+  - §5.3 describes a system sans stack and an IBM Plex Mono mono stack; the real `:root` defines `--font-display` (ClashDisplay), `--font-sans` (Chillax) and a different mono stack (`ui-monospace`, Cascadia, …).
+  - Additional finding: `--font-display` is defined but **never applied** — headings currently render in Chillax (the body sans). This is a concrete target for the typography iteration.
+- **State**: `hugo server` already running on :1313; `/theme-lab/` returns 200 and loads only `css/theme-lab.css` (plus the two webfonts).
+- **Memory**: project memory fact `jracaud-theme-lab-decisions` was **not found** — created now (the earlier journal entry claimed it was revised).
+
+### 2026-09-24 12:45 — iteration 02, round 1 (typography)
+
+- **Question**: "Where should iteration 02 concentrate? One nuance from the state recovery: the webfonts (ClashDisplay + Chillax) are already loaded, but ClashDisplay is never actually applied to headings and the heading-scale tokens are unused — so 'Typography' here means finishing the type system, not adding fonts."
+- **Options offered**:
+  - Typography — finish the type system (recommended)
+  - Panel depth & materials
+  - Color tuning
+  - Components & layout
+- **Answer**: "Typography — finish the type system"
+- **Decision locked**: `decision_id: dec-961f3bc8b07ffcc0`
+- **Implemented** (`static/css/theme-lab.css` only):
+  - Rebuilt the `--text-*` scale (11/12/14/16/18/20/24/30/40/52 px) with body at 16px (`--text-base: 1rem`).
+  - Wired `--font-display` (ClashDisplay) into `.brand`, `.page-head h1`, `.prose h2`, `.prose h3`, `.section-title`, `.card h3` — headings now actually use the display face.
+  - Card index converted from a mono micro-label into a teal ClashDisplay numeral (`--text-lg`, tight display tracking) — the "numerals" part of the typography option.
+  - Applied the `--track-*` and `--leading-*` tokens across mono labels, lede, headings, cards, buttons, footer; lede bumped to 18–20px with relaxed leading and weight 450.
+- **Verified**: `/theme-lab/` returns 200 and loads only `css/theme-lab.css`; `hugo --renderToMemory --quiet` passes.
+- **Open items**: user critique of the new type system (heading voice, scale, numerals, micro-label tracking); next iteration focus once typography is signed off.
+
+### 2026-09-24 12:44 — iteration 02, round 2 (typography locked; new focus)
+
+- **Question**: "After looking at the page, where should the next decision go?"
+- **Options offered**:
+  - Lock typography → move to panel depth & materials
+  - Tune heading voice
+  - Tune body scale & leading
+  - Tune micro-labels & numerals
+- **Answer**: "Lock typography → move to panel depth & materials"
+- **Decision locked**: `decision_id: dec-4b2e1796332ce7f2`
+- **Implemented**: none yet — iteration 02 typography is signed off; next focus is **panel depth & materials**.
+- **Open items**: the panel-depth questions (recess strength, geometry, material texture) still need answers.
+
+### 2026-09-24 12:46 — iteration 02, round 3 (panel depth & materials)
+
+- **Question** (3-part ask):
+  1. "How deep should the recessed panel feel?" — options: Deeper, controlled / Keep current subtle depth / Flatter
+  2. "How should the panel geometry evolve (radius + how much body shows around it)?" — options: Squarer & tighter / Keep current geometry / Rounder & wider
+  3. "What material treatment should the panel and body get?" — options: Machined edge highlight / Fine grain / Keep flat
+- **Answer**:
+  1. "Deeper, controlled"
+  2. "Keep current geometry"
+  3. "Machined edge highlight"
+- **Decision locked**: `decision_id: dec-0e4f5ac4320b5be9`
+- **Implemented** (`static/css/theme-lab.css`):
+  - `--cream-1` darkened `#ede5d3` → `#e6d9bd` (deeper, still warm cream).
+  - `--shadow-recess` strengthened: top inner shadow 2px/8px @14% → 3px/12px @22%, darker top edge line, plus a new 1px white inner ring (`inset 0 0 0 1px rgba(255,255,255,0.5)`) that reads as the machined bezel highlight.
+  - Geometry left untouched (radius 18px, bezel/shell padding unchanged) per the answer.
+- **Verified**: `/theme-lab/` returns 200 and loads only `css/theme-lab.css`; `hugo --renderToMemory --quiet` passes.
+- **Open items**: critique the recess depth and machined rim on the page; faint micro-labels inside the now-darker panel lose a bit of contrast — candidate for the color-tuning round.
+
+### 2026-09-24 12:49 — iteration 02, round 4 (materials locked)
+
+- **Question**: "Now that the deeper recess and machined rim are live on /theme-lab/, what should we refine within panel depth & materials?"
+- **Options offered**: Lock materials as done / Tune the machined rim / Tune card elevation / Tune recess depth again
+- **Answer**: "Lock materials as done"
+- **Decision locked**: `decision_id: dec-8df6b60e33b5462d`
+- **Implemented**: none — closes the **panel depth & materials** focus (deeper recess, machined rim, geometry unchanged).
+- **Open items**: choose the next focus; color tuning is the leading candidate (faint-label contrast on the darker panel).
+
+### 2026-09-24 12:49 — iteration 02, round 5 (focus: components & layout)
+
+- **Question**: "Panel depth & materials is now locked as done. Which focus should the next round take?"
+- **Options offered**: Color tuning / Components & layout / Full review pass
+- **Answer**: "Components & layout"
+- **Decision locked**: `decision_id: dec-4b2e1796332ce7f2` (reopened with new evidence: materials locked as done via `dec-8df6b60e33b5462d`)
+- **Implemented**: none yet — component-scope question follows.
+- **Open items**: which component(s) to build this round (snippet, TOC, tags, nav/header, pagination, search).
+
+### 2026-09-24 12:51 — iteration 02, round 6 (component scope: TOC)
+
+- **Question**: "Which components should this round build? (you can pick several)"
+- **Options offered** (multi-select): Snippet component / Table of contents / Tags & meta chips / Navigation & header treatment
+- **Answer**: "Table of contents"
+- **Decision locked**: `decision_id: dec-f262eca796b39365`
+- **Implemented**: none yet — TOC placement/style fork follows.
+- **Open items**: TOC placement & style; then build it into `layouts/_default/theme-lab.html` + `static/css/theme-lab.css`.
+
+### 2026-09-24 12:57 — iteration 02, round 7 (TOC test pages + hub)
+
+- **Question**: "How should the table of contents be placed and styled?"
+- **Options offered**: Inline INDEX block / Sticky side rail / Collapsible block
+- **Answer** (freeform): "Let's create three sample pages to test all three options. Add a hub page for testing the theme and the different features. Like this I can navigate between pages without having to write to the URL. Make all those pages under the `/theme-lab` route"
+- **Decision locked**: `decision_id: dec-4bd1b259d166fc8a`
+- **Implemented**:
+  - `content/theme-lab.md` moved to `content/theme-lab/_index.md` (section) — `/theme-lab/` becomes the **hub**: new HUB page-head, a "Feature tests" card grid linking to the three TOC pages, existing typography/cards/controls showcase kept below.
+  - New `content/theme-lab/toc-inline.md`, `content/theme-lab/toc-rail.md`, `content/theme-lab/toc-collapsible.md` — identical article bodies with h2/h3 structure so the three treatments can be compared fairly; front matter `tocStyle: inline|rail|collapsible`.
+  - `layouts/_default/theme-lab.html` — renders the three TOC variants from `.TableOfContents`, adds a `← THEME LAB HUB` back link on sub-pages, and fixes the nav "Lab" link to always point at `/theme-lab/`.
+  - `static/css/theme-lab.css` — new `.toc` component (cream sub-panel, teal `PANEL INDEX` label, hairline indentation for h3 entries), collapsible `details/summary` variant with rotating `+` caret, sticky side-rail grid at ≥1024px, and `.back-link` style.
+- **Verified**: all four URLs return 200 and load only `css/theme-lab.css`; markers present (`toc--inline` / `panel--rail` + `toc--rail` / `toc--collapsible`); hub has the three links; `hugo --renderToMemory --quiet` passes.
+- **Open items**: user compares the three TOC variants and picks one (or requests changes); other components (snippet, tags, nav) remain unbuilt.

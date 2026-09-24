@@ -1,21 +1,44 @@
 ---
 title: "Theme Lab"
-description: "A living test page for the new JRacaud theme — recessed panel, cassette cream, safety orange and teal."
+description: "Theme Lab hub — a living test page for the new JRacaud theme: recessed panel, cassette cream, safety orange and teal."
 date: 2025-09-23
 layout: theme-lab
 tags: ["design", "theme"]
 ---
 
 <section class="page-head">
-  <p class="eyebrow">THEME LAB // ITERATION 01</p>
-  <h1>Recessed panel,<br>cassette cream.</h1>
-  <p class="lede">This page is a blank-slate prototype. It uses its own layout and its own stylesheet — nothing from the current theme. Everything below is here to test typography, rhythm and components.</p>
+  <p class="eyebrow">THEME LAB // HUB</p>
+  <h1>One panel,<br>many tests.</h1>
+  <p class="lede">This is the theme-lab hub. The article below exercises typography, rhythm and general components; the cards link to focused feature tests. Every page in this section uses only the theme-lab layout and stylesheet — nothing from the current theme.</p>
   <div class="meta">
-    <span>2025-09-23</span>
+    <span>2026-09-24</span>
     <span>DESIGN</span>
     <span>THEME</span>
+    <span>HUB</span>
   </div>
 </section>
+
+<h2 class="section-title">Feature tests</h2>
+<div class="card-grid">
+  <article class="card">
+    <p class="card-index">01</p>
+    <h3>TOC — inline</h3>
+    <p>The index sits at the top of the article, inside the reading measure.</p>
+    <a class="card-link" href="/theme-lab/toc-inline/">Open page →</a>
+  </article>
+  <article class="card">
+    <p class="card-index">02</p>
+    <h3>TOC — side rail</h3>
+    <p>Sticky index beside the text on wide screens, stacked on mobile.</p>
+    <a class="card-link" href="/theme-lab/toc-rail/">Open page →</a>
+  </article>
+  <article class="card">
+    <p class="card-index">03</p>
+    <h3>TOC — collapsible</h3>
+    <p>A single labeled row that expands on demand.</p>
+    <a class="card-link" href="/theme-lab/toc-collapsible/">Open page →</a>
+  </article>
+</div>
 
 <div class="prose">
 

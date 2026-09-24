@@ -40,7 +40,7 @@
 :root {
   /* Materials */
   --cream-0: #f6f1e7;        /* device body */
-  --cream-1: #ede5d3;        /* recessed panel */
+  --cream-1: #e6d9bd;        /* recessed panel */
   --cream-2: #faf7f0;        /* raised card inside the panel */
   --code-bg: #221d16;        /* dark code well */
 
@@ -66,9 +66,10 @@
   --radius-panel: 18px;
   --radius-card: 10px;
   --shadow-recess:
-    inset 0 2px 8px rgba(38, 33, 26, 0.14),
-    inset 0 1px 0 rgba(38, 33, 26, 0.06),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.55);
+    inset 0 3px 12px rgba(38, 33, 26, 0.22),
+    inset 0 1px 0 rgba(38, 33, 26, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 
   /* Type — Lab typography system */
   --font-display: "ClashDisplay-Variable", "ClashDisplay", "Archivo", system-ui,
@@ -78,15 +79,15 @@
     "SFMono-Regular", "Menlo", "JetBrains Mono", monospace;
 
   --text-2xs: 0.6875rem;                     /* 11px — mono micro-labels */
-  --text-xs: 0.75rem;                        /* 12px */
-  --text-sm: 0.8125rem;                      /* 13px */
-  --text-base: 0.875rem;                     /* 14px — body */
-  --text-md: 1rem;                           /* 16px */
-  --text-lg: 1.125rem;                       /* 18px */
-  --text-xl: 1.375rem;                       /* 22px */
-  --text-2xl: 1.75rem;                       /* 28px */
-  --text-3xl: 2.25rem;                       /* 36px */
-  --text-4xl: 3.25rem;                       /* 52px — display */
+  --text-xs: 0.75rem;                        /* 12px — nav / meta / buttons */
+  --text-sm: 0.875rem;                       /* 14px — small UI, card copy */
+  --text-base: 1rem;                         /* 16px — body */
+  --text-md: 1.125rem;                       /* 18px — h3 / card title */
+  --text-lg: 1.25rem;                        /* 20px — lede / brand / index */
+  --text-xl: 1.5rem;                         /* 24px — reserve */
+  --text-2xl: 1.875rem;                      /* 30px — h2 / section title */
+  --text-3xl: 2.5rem;                        /* 40px — reserve */
+  --text-4xl: 3.25rem;                       /* 52px — page h1 */
   --text-5xl: clamp(3.5rem, 8vw, 6rem);      /* hero display */
   --text-6xl: clamp(5rem, 14vw, 11rem);      /* giant numeral */
 
@@ -159,9 +160,10 @@ a {
 }
 
 .brand {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 650;
+  letter-spacing: var(--track-tight);
   text-decoration: none;
   color: var(--ink);
   white-space: nowrap;
@@ -177,8 +179,8 @@ a {
   justify-content: center;
   gap: 0.5rem 1.25rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
 }
 
@@ -201,8 +203,8 @@ a {
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--track-label);
   color: var(--ink-soft);
   white-space: nowrap;
 }
@@ -246,8 +248,8 @@ a {
 
 .panel-label {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--ink-faint);
   user-select: none;
@@ -269,25 +271,27 @@ a {
 .eyebrow {
   margin: 0 0 0.85rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--orange);
 }
 
 .page-head h1 {
-  margin: 0 0 0.85rem;
-  font-size: clamp(2.1rem, 7vw, 3.25rem);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
-  font-weight: 700;
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 7vw, var(--text-4xl));
+  line-height: var(--leading-tight);
+  letter-spacing: var(--track-display);
+  font-weight: 650;
 }
 
 .lede {
   margin: 0 0 1.5rem;
   max-width: 58ch;
-  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-  line-height: 1.55;
+  font-size: clamp(var(--text-md), 2.4vw, var(--text-lg));
+  line-height: var(--leading-relaxed);
+  font-weight: 450;
   color: var(--ink-soft);
 }
 
@@ -296,8 +300,8 @@ a {
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -321,15 +325,20 @@ a {
 
 .prose h2 {
   margin: 2.25em 0 0.75em;
-  font-size: clamp(1.35rem, 3vw, 1.7rem);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
+  line-height: var(--leading-snug);
+  letter-spacing: var(--track-tight);
+  font-weight: 650;
 }
 
 .prose h3 {
   margin: 2em 0 0.6em;
-  font-size: 1.1rem;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--track-tight);
+  font-weight: 600;
 }
 
 .prose blockquote {
@@ -387,7 +396,7 @@ a {
   background: transparent;
   color: var(--code-ink);
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   line-height: 1.6;
 }
 
@@ -395,9 +404,11 @@ a {
 
 .section-title {
   margin: 2.5rem 0 1rem;
-  font-size: clamp(1.35rem, 3vw, 1.7rem);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
+  line-height: var(--leading-snug);
+  letter-spacing: var(--track-tight);
+  font-weight: 650;
 }
 
 /* ---- Cards -------------------------------------------------------------- */
@@ -431,30 +442,35 @@ a {
 }
 
 .card-index {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: 1;
+  letter-spacing: var(--track-display);
+  font-weight: 650;
   color: var(--teal);
 }
 
 .card h3 {
   margin: 0.55rem 0 0.4rem;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--track-tight);
+  font-weight: 600;
 }
 
 .card p {
   margin: 0 0 1.1rem;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
   color: var(--ink-soft);
 }
 
 .card-link {
   margin-top: auto;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--orange);
@@ -486,7 +502,7 @@ a {
   padding: 0.65em 1.3em;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -515,13 +531,147 @@ a {
   transform: translateY(-1px);
 }
 
+/* ---- Back link ----------------------------------------------------------- */
+
+.back-link {
+  display: inline-block;
+  margin: 0 0 1.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--orange);
+}
+
+/* ---- Table of contents --------------------------------------------------- */
+
+.toc {
+  margin: 0 0 2rem;
+  background: var(--cream-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(38, 33, 26, 0.06);
+}
+
+.toc-label,
+.toc-summary {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.toc-label {
+  padding: 0.9rem 1.25rem 0.6rem;
+}
+
+.toc-body {
+  padding: 0 1.25rem 1.1rem;
+}
+
+.toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc li {
+  margin: 0.4rem 0;
+}
+
+.toc ul ul {
+  margin: 0.4rem 0 0.55rem 0.85rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--line);
+}
+
+.toc a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.toc a:hover {
+  color: var(--orange);
+}
+
+.toc > ul > li > a {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.toc ul ul a {
+  font-size: var(--text-xs);
+}
+
+/* Collapsible variant */
+.toc--collapsible .toc-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.toc--collapsible .toc-summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc-caret {
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.toc--collapsible[open] .toc-caret {
+  transform: rotate(45deg);
+}
+
+.toc--collapsible .toc-body {
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+/* Side-rail variant: stacked on mobile, sticky beside the text on wide screens */
+@media (min-width: 1024px) {
+  .panel--rail .rail {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .panel--rail .toc--rail {
+    position: sticky;
+    top: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .panel--rail .content {
+    max-width: 70ch;
+    margin-inline: auto;
+  }
+}
+
 /* ---- End mark ------------------------------------------------------------ */
 
 .end-mark {
   margin: 3rem 0 0;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--ink-faint);
   text-align: center;
@@ -535,8 +685,8 @@ a {
   gap: 1rem;
   padding: clamp(12px, 2vw, 20px) 0.25rem 0;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--ink-faint);
 }
