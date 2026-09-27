@@ -1,7 +1,7 @@
 # Theme Lab — Decision Log
 
 > Scope: the blank-slate theme exploration for this Hugo site, exercised through the `theme-lab` test page.
-> Status: **iteration 01 implemented**. Iteration 02 focus not yet chosen (question asked, answer not recorded).
+> Status: **iteration 02 — TOC locked to the side rail**. Single living test page at `/theme-lab/`; all TOC comparison pages are scrapped. Next candidates: snippet component, tags/meta chips, navigation & header treatment.
 > Companion: the same decisions are saved in Reasonix project memory under `jracaud-theme-lab-decisions`.
 
 ---
@@ -324,3 +324,51 @@ Every question, answer, decision and implementation step from here on is appende
   - `static/css/theme-lab.css` — new `.toc` component (cream sub-panel, teal `PANEL INDEX` label, hairline indentation for h3 entries), collapsible `details/summary` variant with rotating `+` caret, sticky side-rail grid at ≥1024px, and `.back-link` style.
 - **Verified**: all four URLs return 200 and load only `css/theme-lab.css`; markers present (`toc--inline` / `panel--rail` + `toc--rail` / `toc--collapsible`); hub has the three links; `hugo --renderToMemory --quiet` passes.
 - **Open items**: user compares the three TOC variants and picks one (or requests changes); other components (snippet, tags, nav) remain unbuilt.
+
+### 2026-09-24 13:15 — iteration 02, round 8 (TOC extrude variant)
+
+- **Question**: "After comparing the three TOC pages, which treatment should become the theme's default?"
+- **Options offered**: Inline block / Side rail / Collapsible block / Hybrid — keep several
+- **Answer** (freeform): "I want to test another option. Make the recessed panel scrollable inside the frame and have the TOC as some kind of collapsible element that sits on the shell. When it is extended, it extrudes from the shell, hiding the screen below it. When extruded, the shell shadows follows the new shape, but only for the left, bottom and right borders. The top of the extruded element and the shell are flushed together, as if they are made from the same material. The bottom left and bottom right corners have the same radius as the shell's corners, the top left and top right corners are also rounded, but in the opposite direction if possible otherwise do not add any roundness to them. The file /home/vendinois/Pictures/Screenshots/noctalia-shell-extruded-element.png shows the effect I want to achieve."
+- **Decision locked**: `decision_id: dec-d997765e0cadf56d`
+- **Implemented**:
+  - `content/theme-lab/toc-extrude.md` — fourth TOC test page (`tocStyle: extrude`), same comparison article plus a new "Shell extrusion" section.
+  - `content/theme-lab/_index.md` — hub "Feature tests" now has a 04 card linking to the extrude page.
+  - `layouts/_default/theme-lab.html` — extrude branch: `<details class="extrude">` trigger on the shell before the panel, drawer wraps `.TableOfContents`; body gets `body--extrude`, shell gets `shell--extrude`, panel gets `panel--scroll`.
+  - `static/css/theme-lab.css` — `.shell--extrude` (100dvh flex column), `.panel--scroll` (internal scroll), `.extrude-trigger` (mono shell-material row), `.extrude-drawer.toc--extrude` (absolute overlay, cream-0 material, no top border, bottom corners 18px, top corners square, downward-only shadow so it reads on left/bottom/right).
+- **Assumptions recorded**: drawer width = panel width; bottom radius = panel radius 18px; concave top corners are not possible in plain CSS so they are square per the fallback in the answer. The reference image was not viewable (no image model configured), so the build follows the written spec.
+- **Verified**: `/theme-lab/toc-extrude/` returns 200 with all markers (`body--extrude`, `shell--extrude`, `panel--scroll`, `extrude`, `extrude-drawer toc toc--extrude`); hub has the 04 link; `hugo --renderToMemory --quiet` passes.
+- **Open items**: user checks the extrude variant and decides the default TOC treatment; other components (snippet, tags, nav) remain unbuilt.
+
+### 2026-09-24 13:22 — iteration 02, round 9 (extrude correction)
+
+- **Question**: "After checking /theme-lab/toc-extrude/, what's the verdict?"
+- **Options offered**: Extrude wins — lock it / Tune the extrude variant / Go back to the first three / Keep comparing
+- **Answer** (freeform): "The implementation of the extrude variant is not what I asked for. Here is what I want: The shell is always visible, so it is fixed on the page. The recessed panel slides underneath the shell. The whole page is designed as if we are looking at some kind of monitor. The TOC is an element that sits on the shell and that expand above the shell from the top. So the user always sees the TOC when scrolling the content. The page itself does not scroll, only the recessed panel."
+- **Decision locked**: `decision_id: dec-6f3fdd1c13bba45e`
+- **Implemented**: none yet — one clarifying geometry question asked before rebuilding.
+- **Open items**: rebuild the extrude variant as a fixed monitor shell with an internal-scrolling screen; drawer direction to confirm.
+
+### 2026-09-27 10:47 — state recovery, round 3 (resume)
+
+- **Question** (user request): "Remind me where we left off"
+- **Options offered**: none — recovery request.
+- **Answer / Decision locked**: state rehydrated. The clarifying geometry question from the prior session was never journaled and its answer is lost, so it is re-asked before the rebuild (see next entry).
+- **Implemented**: none — recovery only. Verified `/theme-lab/` returns 200. Confirmed the working tree still holds the round-8 extrude build (`toc-extrude.md` untracked, layout + CSS modified vs `a4afe39`) that round 9 rejected via `dec-6f3fdd1c13bba45e`; `content/theme-lab.md` is gone and `content/theme-lab/_index.md` is the hub truth.
+- **Open items**: drawer direction + width answers, then rebuild the extrude variant as the fixed monitor shell.
+
+### 2026-09-27 10:56 — iteration 02, round 10 (TOC locked: side rail; test pages scrapped)
+
+- **Question** (the standing fork from rounds 6–9): which table-of-contents treatment should become the theme's default?
+- **Options offered**: Inline block / Side rail / Collapsible block / Hybrid — keep several (round 8), plus the extrude variant explored in rounds 8–9.
+- **Answer** (verbatim): "I am taking a decision about the current work that was about the TOC. I want to use the side rail version. So scrap all the test pages, remove all unnecessary css not related to the side rail TOC."
+- **Decision locked**: direct user instruction this session (no new `decision_id` — no `ask` was sent). This supersedes `dec-d997765e0cadf56d` and closes the TOC fork: **side rail is the theme default**.
+- **Implemented**:
+  - Deleted `content/theme-lab/toc-inline.md`, `toc-rail.md`, `toc-collapsible.md`, `toc-extrude.md` (and the temporary `tocprobe.md` used to verify `.TableOfContents` behavior).
+  - `content/theme-lab/_index.md` — no longer a hub; it is the single living test page. Removed the "Feature tests" card grid and hub wording; page-head now states the locked side-rail treatment. Converted the raw `<h2 class="section-title">` headings (`Project cards`, `Controls`) to markdown `##` headings so the auto-generated TOC indexes them; fixed the stale "system font stack, no webfonts" note to reflect ClashDisplay + Chillax.
+  - `layouts/_default/theme-lab.html` — removed all `tocStyle` branches, the back-link, and the extrude markup; the layout now always renders `<main class="panel panel--rail">` with the `.rail` grid (`.toc toc--rail` + `.content`).
+  - `static/css/theme-lab.css` — removed the `.back-link`, `.toc--collapsible` (caret/summary), and the whole extrude system (`.body--extrude`, `.shell--extrude`, `.panel--scroll`, `.extrude*`, `.toc--extrude`); `.section-title` selector replaced by `.content > h2`; `.toc-summary` removed from the shared label selector. Kept the base `.toc` and the `≥1024px` side-rail grid.
+  - Cleaned stale `public/theme-lab/toc-*` dirs and restarted `hugo server` on :1313 (the old fast-render process still served the deleted pages).
+- **Assumptions recorded**: keeping `_index.md` (rather than moving back to `theme-lab.md`) preserves the `/theme-lab/` URL and section structure with the least churn; `public/` is gitignored so its cleanup does not affect the diff.
+- **Verified**: `/theme-lab/` returns 200 with `panel panel--rail` + `toc toc--rail` and a TOC containing Article body → Technical notes, Project cards, Controls; the four deleted pages return 404; only `css/theme-lab.css` is loaded; `hugo --renderToMemory --quiet` passes; no leftover references to the removed variants in CSS/layout/content.
+- **Open items**: user critique of the side rail on mobile (stacked) vs desktop (sticky); remaining components — snippet component, tags/meta chips, navigation & header treatment — are still unbuilt.

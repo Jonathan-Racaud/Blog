@@ -1,44 +1,22 @@
 ---
 title: "Theme Lab"
-description: "Theme Lab hub — a living test page for the new JRacaud theme: recessed panel, cassette cream, safety orange and teal."
+description: "Theme Lab — the single living test page for the new JRacaud theme: recessed panel, cassette cream, safety orange and teal, side-rail table of contents."
 date: 2025-09-23
 layout: theme-lab
 tags: ["design", "theme"]
 ---
 
 <section class="page-head">
-  <p class="eyebrow">THEME LAB // HUB</p>
-  <h1>One panel,<br>many tests.</h1>
-  <p class="lede">This is the theme-lab hub. The article below exercises typography, rhythm and general components; the cards link to focused feature tests. Every page in this section uses only the theme-lab layout and stylesheet — nothing from the current theme.</p>
+  <p class="eyebrow">THEME LAB // ITERATION 02</p>
+  <h1>One panel,<br>one side-rail index.</h1>
+  <p class="lede">The table of contents is locked to the side-rail treatment: a sticky panel index beside the article on wide screens, stacked above the text on mobile. This single page is the living test for typography, materials, cards, controls and the index.</p>
   <div class="meta">
-    <span>2026-09-24</span>
+    <span>2026-09-27</span>
     <span>DESIGN</span>
     <span>THEME</span>
-    <span>HUB</span>
+    <span>SIDE RAIL</span>
   </div>
 </section>
-
-<h2 class="section-title">Feature tests</h2>
-<div class="card-grid">
-  <article class="card">
-    <p class="card-index">01</p>
-    <h3>TOC — inline</h3>
-    <p>The index sits at the top of the article, inside the reading measure.</p>
-    <a class="card-link" href="/theme-lab/toc-inline/">Open page →</a>
-  </article>
-  <article class="card">
-    <p class="card-index">02</p>
-    <h3>TOC — side rail</h3>
-    <p>Sticky index beside the text on wide screens, stacked on mobile.</p>
-    <a class="card-link" href="/theme-lab/toc-rail/">Open page →</a>
-  </article>
-  <article class="card">
-    <p class="card-index">03</p>
-    <h3>TOC — collapsible</h3>
-    <p>A single labeled row that expands on demand.</p>
-    <a class="card-link" href="/theme-lab/toc-collapsible/">Open page →</a>
-  </article>
-</div>
 
 <div class="prose">
 
@@ -56,7 +34,7 @@ Reading is the primary job, so the measure is limited to roughly 70 characters p
 
 ### Technical notes
 
-Body copy uses the system font stack so there are no webfont requests yet. Micro-labels use a monospace stack. When we add real fonts later, the layout should not change because all spacing is set in relative units.
+Body copy uses Chillax and headings use ClashDisplay — two variable fonts loaded locally from the design system. All spacing is set in relative units, so swapping fonts later will not break the layout.
 
 ```swift
 struct ThemePanel {
@@ -72,7 +50,8 @@ struct ThemePanel {
 
 </div>
 
-<h2 class="section-title">Project cards</h2>
+## Project cards
+
 <div class="card-grid">
   <article class="card">
     <p class="card-index">01</p>
@@ -94,7 +73,8 @@ struct ThemePanel {
   </article>
 </div>
 
-<h2 class="section-title">Controls</h2>
+## Controls
+
 <div class="controls">
   <a class="btn btn-primary" href="#">Primary action</a>
   <a class="btn btn-ghost" href="#">Secondary action</a>
