@@ -1,8 +1,17 @@
+# Third-party notices
+
+This theme includes shortcode code derived from
+[cupper-hugo-theme](https://github.com/zwbetz-gh/cupper-hugo-theme).
+
+Copyright (c) 2017 Heydon Pickering
+Copyright (c) 2019 Zachary Betz
+
+Licensed under the MIT License:
+
 MIT License
 
-Copyright (c) 2026 Jonathan Racaud
-
-This theme includes third-party code; see NOTICE for attribution.
+Copyright (c) 2017 Heydon Pickering
+Copyright (c) 2019 Zachary Betz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

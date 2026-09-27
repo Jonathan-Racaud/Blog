@@ -1,3 +1,4 @@
+{{/* Derived from cupper-hugo-theme — Copyright (c) 2017 Heydon Pickering, (c) 2019 Zachary Betz — MIT License */}}
 {{ $JSON := $.Site.Data.principles }}
 {{ $included := replace (.Get "include") ", " "," }}
 {{ $included := apply (split $included ",") "lower" "." }}
