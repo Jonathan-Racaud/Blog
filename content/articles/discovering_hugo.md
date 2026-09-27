@@ -1,5 +1,6 @@
 ---
 title: Discovering Hugo
+short: I discover the project Hugo and how I modified one of the available themes.
 publishdate: 30 Jan 2022
 ---
 So I decided to go with the static website generator called Hugo for building my blog.

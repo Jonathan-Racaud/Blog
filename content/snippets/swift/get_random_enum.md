@@ -1,5 +1,6 @@
 ---
 title: "Swift - Get random enum"
+ProgLang: Swift
 publishdate: 30 Jan 2022
 ---
 ## Function definition
@@ -36,7 +37,7 @@ Here's how to understand the function declaration. I've put it on multiple line 
 {{< code numbered="true" language="swift" >}}
 func getRandomEnum[[[<T>]]]() -> [[[T?]]] 
     [[[where T:]]] [[[RawRepresentable & CaseIterable]]] 
-    [[[&& T.RawValue == Int ]]] {}
+    [[[&& T.RawValue == Int]]] {}
 {{< /code >}}
 
 1. We specify that it takes a generic type of T

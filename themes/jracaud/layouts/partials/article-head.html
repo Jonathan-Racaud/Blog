@@ -1,0 +1,16 @@
+<section class="page-head">
+    <p class="eyebrow">ARTICLE // </p>
+    <h1>{{ .Title }}</h1>
+    <p class="lede"></p>
+    <div class="meta">
+        {{ $dateFormat := $.Site.Params.dateFormat | default "Jan 2, 2026" }}
+        {{ $publishDate := .PublishDate }}
+
+        <span>{{ $publishDate.Format $dateFormat }}</span>
+
+        {{ with .Params.tags }}
+        {{ $href := print ("tags/" | relLangURL) (. | urlize) "/" }}
+        <span><a href="{{ $href }}">{{ . }}</a></span>
+        {{ end }}
+    </div>
+</section>

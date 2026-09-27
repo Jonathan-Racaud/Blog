@@ -1,0 +1,23 @@
+{{ define "main" }}
+<main id="main" class="panel panel--rail">
+    <div class="panel-head">
+        <span class="panel-label">ARTICLE</span>
+        <span class="panel-label">YOLO</span>
+    </div>
+    <div class="rail">
+        <nav class="toc toc--rail" aria-label="Table of Content">
+            <p class="toc-label">Table of Content</p>
+            <div class="toc-body">{{ .TableOfContents }}</div>
+        </nav>
+        <article class="content">
+            {{ partial "article-head" . }}
+
+            <section class="prose">
+                {{ .Content }}
+            </section>
+        </article>
+    </div>
+
+    <p class="end-mark">- THANKS FOR READING -</p>
+</main>
+{{ end }}

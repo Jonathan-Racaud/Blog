@@ -2,7 +2,7 @@ baseURL: https://jracaud.com
 locale: en-us
 defaultContentLanguage: en
 title: JRacaud
-theme: cupper-hugo-theme
+theme: jracaud
 # googleAnalytics: UA-123456789-1
 # disqusShortname: yourdiscussshortname
 enableGitInfo: true

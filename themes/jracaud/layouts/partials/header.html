@@ -1,0 +1,12 @@
+<header class="chrome">
+    <a class="brand" href="{{ .Site.Home.RelPermalink }}">J<span>Racaud</span></a>
+    <nav class="nav" aria-label="Main navigation">
+        {{ range .Site.Menus.nav }}
+        <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+        {{ end }}
+    </nav>
+    <div class="status" aria-hidden="true">
+        <span class="led"></span>
+        <span class="status-text">SYS OK</span>
+    </div>
+</header>

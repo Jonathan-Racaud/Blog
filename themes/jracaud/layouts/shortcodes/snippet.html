@@ -1,0 +1,25 @@
+{{ $code := .Inner }}
+{{ $numbered := .Get "numbered" }}
+{{ $language := .Get "language" }}
+{{ $colored := .Get "colored" }}
+{{ $spanClass := "<span class='highlighted-code'>" }}
+
+{{ if (ne $colored "true") }} 
+    {{ $spanClass := "<span class='highlighted'>" }}
+{{ end }}
+
+{{ $highlighted := transform.Highlight $code $language }}
+{{ $highlighted := replace $highlighted "[[[" $spanClass }}
+{{ $highlighted := replace $highlighted "]]]" "</span>" }}
+<div class='code-annotated {{ if and ($numbered) (ne $numbered "false") }}numbered-annotation{{ end }}'>
+</div>
+<div class="snippet">
+    <div class="snippet-head">
+        <span class="snippet-name">{{ "" }}</span>
+        <span class="snippet-lang">{{ "" }}</span>
+        <button class="snippet-copy" type="button" aria-live="polite">COPY</button>
+    </div>
+    <div class="snippet-code">
+        {{ $highlighted | safeHTML }}
+    </div>
+</div>

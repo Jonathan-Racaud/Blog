@@ -1,0 +1,16 @@
+{{ define "main" }}
+<main id="main" class="panel">
+  <h1>{{ .Title }}</h1>
+  <ul class="patterns-list" id="list">
+    {{ range .Pages.ByPublishDate.Reverse }}
+    <li>
+      <h2>
+        <a href="{{ .RelPermalink }}">
+          {{ .Title }}
+        </a>
+      </h2>
+    </li>
+    {{ end }}
+  </ul>
+</main>
+{{ end }}

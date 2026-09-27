@@ -1,7 +1,7 @@
 # Theme Lab — Decision Log
 
 > Scope: the blank-slate theme exploration for this Hugo site, exercised through the `theme-lab` test page.
-> Status: **iteration 02 — TOC locked to the side rail**. Single living test page at `/theme-lab/`; all TOC comparison pages are scrapped. Next candidates: snippet component, tags/meta chips, navigation & header treatment.
+> Status: **iteration 02 — full element sweep on the single test page**. TOC side rail locked; snippet component built (cassette-label strip + copy). The page now exercises every available element as a decision board. Next candidates: tags/meta chips, navigation & header treatment.
 > Companion: the same decisions are saved in Reasonix project memory under `jracaud-theme-lab-decisions`.
 
 ---
@@ -404,3 +404,16 @@ Every question, answer, decision and implementation step from here on is appende
 - **Implemented** (`static/css/theme-lab.css`): added `.content .highlight ::selection { background: var(--orange); color: #ffffff; }` — scoped override of the global `::selection` (which sets dark ink on an orange wash and made selected code invisible on the dark well). Covers both the snippet's code well and the plain code well in "Technical notes".
 - **Verified**: `/theme-lab/` returns 200; the scoped selection rule is served by `css/theme-lab.css`; `hugo --renderToMemory --quiet` passes.
 - **Open items**: none from this fix — critique of the snippet component continues (label-strip proportions, copy-button placement, `SWIFT` pill position); remaining components — tags/meta chips, navigation & header treatment.
+
+### 2026-09-27 11:52 — iteration 02, round 13 (full element sweep on the test page)
+
+- **Question** (user request): "Rewrite the test page so as to use all available elements so I can decide which one to modify next"
+- **Options offered**: none — direct request. Assumption recorded: "available elements" = everything the current CSS implements; the still-unbuilt candidates (tags/meta chips, navigation & header treatment) are intentionally not invented here.
+- **Answer / Decision locked**: direct user instruction (no `ask` sent, no new `decision_id`).
+- **Implemented** (`content/theme-lab/_index.md` rewritten):
+  - New page-head: eyebrow `THEME LAB // ITERATION 02 · FULL SWEEP`, h1 "Every element, one panel.", lede reframed as a decision board, meta row now includes `SNIPPET`.
+  - Sections now exercise every implemented element: prose (h2, h3, paragraph with link/bold/inline code, blockquote, list), a top-level plain `highlight` code well (`.content .highlight`), two snippet components (Swift + SHELL; the long `deploy-site-to-production.sh` filename exercises the ellipsis), the three-card grid, primary/ghost controls, and the end mark.
+  - All five h2 headings plus the h3 feed the side-rail TOC: Prose, Lists & rhythm, Plain code well, Snippet component, Project cards, Controls.
+  - Updated the `> Status` line of this log to reflect the sweep.
+- **Verified**: restarted `hugo server` on :1313 (the previous process had stopped); `/theme-lab/` returns 200; markers for every component present (2 snippets, 3 highlights, 3 cards, 2 buttons, 6 TOC entries); page loads only `css/theme-lab.css` + `js/theme-lab.js`; no `{{<` shortcode leak; `hugo --renderToMemory --quiet` passes.
+- **Open items**: user picks the next element to modify from the sweep; remaining unbuilt components — tags/meta chips, navigation & header treatment.

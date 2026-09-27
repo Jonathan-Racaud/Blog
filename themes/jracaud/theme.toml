@@ -1,0 +1,9 @@
+name = "jracaud"
+license = "MIT"
+description = "My own personal theme"
+tags = ["blog", "minimalist"]
+min_version = "0.1.0"
+
+[author]
+name = "Jonathan Racaud"
+homepage = "https://jracaud.com"
