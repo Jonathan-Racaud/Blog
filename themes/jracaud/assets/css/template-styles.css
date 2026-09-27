@@ -335,6 +335,47 @@ a {
   font-style: italic;
 }
 
+/* Notes and warnings — raised cards inside the prose */
+.note {
+  margin: 2em 0;
+  padding: 1rem 1.25rem 1.1rem;
+  background: var(--cream-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(38, 33, 26, 0.06);
+}
+
+.note-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+.note > div > :first-child {
+  margin-top: 0;
+}
+
+.note > div > :last-child {
+  margin-bottom: 0;
+}
+
+.note p {
+  margin-bottom: 0.75em;
+}
+
+.note.warning {
+  border-left: 1px solid var(--line);
+}
+
+.note.warning .note-label {
+  color: var(--orange);
+}
+
 .prose ul {
   margin: 1.5em 0;
   padding-left: 1.35em;
