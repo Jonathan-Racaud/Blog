@@ -1,8 +1,9 @@
----
-title: So... I'm writing my own programming language - Part 1
-short: Part 1 of a serie of articles about writing my own programming language, implemented in Beef.
-publishdate: 31 May 2022
----
++++
+title = "So... I'm writing my own programming language - Part 1"
+description = "Part 1 of a serie of articles about writing my own programming language, implemented in Beef."
+tags = ['Programming', 'Programming Languages']
+publishdate = "31 May 2022"
++++
 I think I may have gone mad. I started working on my own programming language.
 
 # How it started

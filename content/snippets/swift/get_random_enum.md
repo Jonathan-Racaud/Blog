@@ -1,8 +1,9 @@
----
-title: "Swift - Get random enum"
-ProgLang: Swift
-publishdate: 30 Jan 2022
----
++++
+title = "Swift - Get random enum"
+tags = ["Swift", "Enum"]
+publishdate = "30 Jan 2022"
++++
+
 ## Function definition
 ```swift
 func getRandomEnum<T>() -> T? where T: RawRepresentable & CaseIterable && T.RawValue == Int {
