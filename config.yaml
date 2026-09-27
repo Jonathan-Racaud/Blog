@@ -24,17 +24,11 @@ imaging:
 params:
   description: Software developer that experiment with stuffs.
   homeMetaContent: Software developer that experiment with stuffs.
-  footer: Made with [Hugo](https://gohugo.io/). <br>Base theme by [Cupper](https://github.com/zwbetz-gh/cupper-hugo-theme).
-  # For more date formats see https://gohugo.io/functions/format/
+  footer: 2026 JRacaud.
   dateFormat: 2 Jan 2006
-  # codePenUser: someUser
   katex: true
   hideHeaderLinks: false
-  search: true
-  showThemeSwitcher: false
   defaultDarkTheme: false
-  moveFooterToHeader: true
-  # navTitleText: Cupper Theme
   logoAlt: JRacaud
 
 menu:
@@ -78,4 +72,4 @@ markup:
     tabWidth: 2
   tableOfContents:
     endLevel: 6
-    startLevel: 2
+    startLevel: 1
