@@ -372,3 +372,35 @@ Every question, answer, decision and implementation step from here on is appende
 - **Assumptions recorded**: keeping `_index.md` (rather than moving back to `theme-lab.md`) preserves the `/theme-lab/` URL and section structure with the least churn; `public/` is gitignored so its cleanup does not affect the diff.
 - **Verified**: `/theme-lab/` returns 200 with `panel panel--rail` + `toc toc--rail` and a TOC containing Article body → Technical notes, Project cards, Controls; the four deleted pages return 404; only `css/theme-lab.css` is loaded; `hugo --renderToMemory --quiet` passes; no leftover references to the removed variants in CSS/layout/content.
 - **Open items**: user critique of the side rail on mobile (stacked) vs desktop (sticky); remaining components — snippet component, tags/meta chips, navigation & header treatment — are still unbuilt.
+
+### 2026-09-27 11:40 — iteration 02, round 11 (snippet component)
+
+- **Question** (3-part ask): "Let's iterate on the snippet component" →
+  1. "What should a snippet component include by default?"
+  2. "How should the snippet header read, given the cassette-cream / recessed-panel metaphor?"
+  3. "A copy button needs a few lines of JavaScript (the theme-lab layout currently loads no scripts). Add it?"
+- **Options offered**:
+  1. Anatomy: Compact — header + code + copy / Full workstation — header + line numbers + code + meta footer / Bare — code + copy only
+  2. Header material: Cassette label strip / Dark strip with hairline divider / No header — caption above the well
+  3. Copy button: Yes — tiny inline script / No — CSS-only for now / Yes, but only the button visual
+- **Answer**:
+  1. "Compact: header + code + copy"
+  2. "Cassette label strip"
+  3. "Tiny vanilla JS in a file loaded by the page." (refines the offered "inline script" option into an external file)
+- **Decision locked**: `decision_id: dec-b910c2995242aa4b`
+- **Implemented**:
+  - `static/js/theme-lab.js` — new, tiny dependency-free script; clipboard API with `execCommand` fallback; toggles `.is-copied` + "COPIED" for 1600 ms.
+  - `layouts/_default/theme-lab.html` — loads `js/theme-lab.js` via `relURL` with `defer` (the page's first and only script).
+  - `static/css/theme-lab.css` — new `.snippet` component: cream cassette-label `.snippet-head` (`.snippet-name` file label, teal `.snippet-lang` pill, `.snippet-copy` pill button with orange hover / teal copied state); `.snippet .snippet-code .highlight` overrides the code-well radius/margin so the head and well read as one tape.
+  - `content/theme-lab/_index.md` — new `## Snippet component` section (appears in the side-rail TOC) with a short prose intro and a `Theme+Palette.swift` snippet built from the built-in `highlight` shortcode inside a raw-HTML `<figure class="snippet">`; the existing raw code well in "Technical notes" is kept for comparison.
+- **Verified**: `/theme-lab/` returns 200; `snippet`/`snippet-head`/`snippet-code`/`snippet-copy` markers all present; exactly one `highlight` for the snippet plus the pre-existing one; page loads only `css/theme-lab.css` and `js/theme-lab.js`; no `{{<` shortcode leak; `hugo --renderToMemory --quiet` passes.
+- **Open items**: user critique of the label-strip proportions, copy-button placement/behavior (test the clipboard on `/theme-lab/`), and whether the plain code well in "Technical notes" should be converted to a snippet too; remaining components — tags/meta chips, navigation & header treatment.
+
+### 2026-09-27 11:47 — iteration 02, round 12 (snippet selection fix)
+
+- **Question** (user report): "Selecting the code in the snippet hides it due to the color of the highlight. Is it possible to change the behavior so that the selected text appears white?"
+- **Options offered**: none — direct fix request.
+- **Answer / Decision locked**: direct user instruction (no `ask` sent, no new `decision_id`). Selected text inside the dark code well must be white.
+- **Implemented** (`static/css/theme-lab.css`): added `.content .highlight ::selection { background: var(--orange); color: #ffffff; }` — scoped override of the global `::selection` (which sets dark ink on an orange wash and made selected code invisible on the dark well). Covers both the snippet's code well and the plain code well in "Technical notes".
+- **Verified**: `/theme-lab/` returns 200; the scoped selection rule is served by `css/theme-lab.css`; `hugo --renderToMemory --quiet` passes.
+- **Open items**: none from this fix — critique of the snippet component continues (label-strip proportions, copy-button placement, `SWIFT` pill position); remaining components — tags/meta chips, navigation & header treatment.

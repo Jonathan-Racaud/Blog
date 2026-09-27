@@ -73,6 +73,35 @@ struct ThemePanel {
   </article>
 </div>
 
+## Snippet component
+
+<div class="prose">
+
+Short, copy-pasteable code notes get a **snippet component**: a cassette-label header strip on the dark code well with one copy action. The label names the file, the teal pill names the language, and the button confirms the copy.
+
+</div>
+
+<figure class="snippet">
+  <div class="snippet-head">
+    <span class="snippet-name">Theme+Palette.swift</span>
+    <span class="snippet-lang">SWIFT</span>
+    <button class="snippet-copy" type="button" aria-live="polite">COPY</button>
+  </div>
+  <div class="snippet-code">
+{{< highlight swift >}}
+extension Theme {
+    static func palette(for mode: Mode) -> Palette {
+        Palette(
+            body: mode == .light ? .cream : .ink,
+            accent: .orange,
+            status: .teal
+        )
+    }
+}
+{{< /highlight >}}
+  </div>
+</figure>
+
 ## Controls
 
 <div class="controls">
