@@ -23,7 +23,7 @@ imaging:
 
 params:
   description: Software developer that experiment with stuffs.
-  homeMetaContent: Software developer that experiment with stuffs.
+  homeMetaContent: Articles and snippets on programming and technology.
   footer: 2026 JRacaud.
   dateFormat: 2 Jan 2006
   katex: true
@@ -42,6 +42,9 @@ menu:
     - name: Snippets
       url: /snippets/
       weight: 3
+    - name: About
+      url: /about/
+      weight: 4
 
 markup:
   defaultMarkdownHandler: goldmark

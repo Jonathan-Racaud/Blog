@@ -1,6 +1,15 @@
 {{ define "main" }}
   <main id="main" class="panel">
+    <div class="panel-head">
+      <span class="panel-label">FEED</span>
+      <span class="panel-label">YOLO</span>
+    </div>
     <h1>{{ .Title }}</h1>
-    {{ .Content }}
+    <div class="card-grid">
+      {{ $pages := where .Site.RegularPages "Section" "in" (slice "articles" "snippets") }}
+      {{ range $pages.ByPublishDate.Reverse }}
+        {{ partial "content-card.html" . }}
+      {{ end }}
+    </div>
   </main>
 {{ end }}

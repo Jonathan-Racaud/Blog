@@ -1,0 +1,21 @@
+{{ $dateFormat := $.Site.Params.dateFormat | default "2 Jan 2006" }}
+<article class="card">
+  <span class="card-meta">
+    {{ if eq .Section "snippets" }}SNIPPET{{ else }}ARTICLE{{ end }} // {{ .PublishDate.Format $dateFormat }}
+  </span>
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  {{ if eq .Section "articles" }}
+    {{ with .Description }}
+      <p>{{ . }}</p>
+    {{ else }}
+      {{ with .Params.short }}
+        <p>{{ . }}</p>
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ with .Params.tags }}
+      <p>{{ delimit . " · " }}</p>
+    {{ end }}
+  {{ end }}
+  <a class="card-link" href="{{ .RelPermalink }}">{{ if eq .Section "snippets" }}Open{{ else }}Read{{ end }} →</a>
+</article>

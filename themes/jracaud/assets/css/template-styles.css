@@ -557,6 +557,15 @@ a {
   color: var(--teal);
 }
 
+.card-meta {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
 .card h3 {
   margin: 0.55rem 0 0.4rem;
   font-family: var(--font-display);

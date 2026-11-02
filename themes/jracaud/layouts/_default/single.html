@@ -1,0 +1,16 @@
+{{ define "main" }}
+<main id="main" class="panel">
+    <div class="panel-head">
+        <span class="panel-label">PAGE</span>
+        <span class="panel-label">YOLO</span>
+    </div>
+
+    <section class="page-head">
+        <h1>{{ .Title }}</h1>
+    </section>
+
+    <section class="prose">
+        {{ .Content }}
+    </section>
+</main>
+{{ end }}
