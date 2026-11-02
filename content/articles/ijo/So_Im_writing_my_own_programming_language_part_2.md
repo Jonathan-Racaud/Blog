@@ -71,13 +71,13 @@ As you can see, the language only implements the bare minimum for writing simple
 Having the constraint of not having keywords and trying to design a readable syntax for a C-like language led me to take some choices that could be described as odd.
 In the above snippet the most striking is possibly the `conditional` expressions and `loop` expression.
 
-### Conditionals
+## Conditionals
 
 Since I cannot have keywords such as `if`, `else`, or `else if/elif` and derivative of that, I decided to use the same combination of symbols for expressing all of the above:
 
 `?(someCondition)` expresses both `if` and `else if` in ijo and to express `else`, the lexer simply checks for this exact combination of symbols: `?()`
 
-### Loops
+## Loops
 
 The loops follow a similar philosophy, since I did not want to use multiple symbols for expressing both a `for` loop and `while` loop, I decided to "combine" the two together.
 
@@ -104,13 +104,13 @@ $i = 0
 }
 ```
 
-### Variables and Constants
+## Variables and Constants
 
 To distinguish variables from constants, I decided to simply reuse common keywords that have adjacent meaning in different programming languages: `#constant` and `$variables`.
 The inspiration comes from both C and PHP where in C `#define` are often used to define constant values and in PHP `$variable` is how we declare and use variables. The difference with PHP in this instance, is that
 in ijo, those symbols are only used to declare them and are not necessary to retrieve their values, which I think makes it nicer than in PHP.
 
-### Functions, structs and other concepts
+## Functions, structs and other concepts
 
 While designing the language came the question on how to define functions and structs (even though the latter are not implemented) and the syntax went through several iterations.
 One principle I wanted to follow in this language was to use similar patterns to have great deal of coherence for writing and reading the language.
